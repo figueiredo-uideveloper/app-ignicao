@@ -1,28 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MapView, { Marker, } from 'react-native-maps';
 import { StyleSheet, Image } from 'react-native';
+import { withNavigationFocus } from 'react-navigation';
+import api from '../services/api';
 
-// import { Container } from './styles';
+function Dashboard({ navigation, isFocused }) {
+  const [users, setUsers] = useState([]);
 
-export default function Dashboard({ navigation }) {
-  function handleUserClick() {
-    navigation.navigate('Profile', { name: 'Goffi' });
+  useEffect(() => {
+    if (isFocused) {
+      async function loadUsers() {
+        const response = await api.get('users');
+  
+        setUsers(response.data);
+      }
+
+      console.log('Teste');
+  
+      loadUsers();
+    }
+  }, [isFocused]);
+
+  function handleUserClick(user) {
+    navigation.navigate('Profile', { user });
   }
 
   return (
     <MapView 
       showsUserLocation
       initialRegion={{
-        latitude: -7.1466036,
-        longitude: -34.9516375,
+        latitude: -15.7388168,
+        longitude: -47.8985612,
         latitudeDelta: 0.0122,
         longitudeDelta: 0.0121,
       }}
       style={StyleSheet.absoluteFillObject}
     >
-      <Marker onPress={handleUserClick} title="Gabriel Goffi" description="Never fucking stop!" coordinate={{ latitude: -7.1466036, longitude: -34.9516375 }}>
-        <Image style={{ width: 50, height: 50, borderRadius: 25 }} source={{ uri: 'https://pbs.twimg.com/profile_images/778771552712163328/dPVjJD03_400x400.jpg' }} />
-      </Marker>
+      {users.map(user => (
+        <Marker key={user._id} onPress={() => handleUserClick(user)} coordinate={{ latitude: user.latitude, longitude: user.longitude }}>
+          <Image style={{ width: 50, height: 50, borderRadius: 25 }} source={{ uri: user.avatar }} />
+        </Marker>
+      ))}
     </MapView>
   );
 }
@@ -30,3 +48,5 @@ export default function Dashboard({ navigation }) {
 Dashboard.navigationOptions = {
   header: null,
 }
+
+export default withNavigationFocus(Dashboard);

@@ -16,6 +16,7 @@ export const Input = styled.TextInput.attrs({
   border-radius: 4px;
   margin-bottom: 15px;
   font-size: 17px;
+  opacity: ${props => props.editable === false ? 0.7 : 1};
 `;
 
 export const SubmitButton = styled(RectButton)`

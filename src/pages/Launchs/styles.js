@@ -21,3 +21,18 @@ export const ButtonText = styled.Text`
   font-size: 16px;
   text-align: center;
 `;
+
+export const CalendarButton = styled.TouchableOpacity`
+  border-color: #999;
+  border-width: 2px;
+  border-radius: 4px;
+  margin-top: 20px;
+  padding: 12px 20px;
+`;
+
+export const CalendarButtonText = styled.Text`
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+`;

@@ -33,13 +33,10 @@ export default createAppContainer(
       Launchs,
       ProfileUpdate,
     }, {
-      initialRouteName: 'ProfileUpdate',
       tabBarOptions: {
         activeTintColor: '#FFF',
         style: { backgroundColor: '#111' }
       },
     }),
-  }, {
-    initialRouteName: 'SignedRoutes'
   })
 );

@@ -2,29 +2,31 @@ import React from 'react';
 import { Container, Avatar, Label, Info } from './styles';
 
 export default function Profile({ navigation }) {
+  const user = navigation.getParam('user');
+
   return (
     <Container>
       <Avatar 
         source={{ 
-          uri: 'https://pbs.twimg.com/profile_images/778771552712163328/dPVjJD03_400x400.jpg'
+          uri: user.avatar
         }} 
       />
 
       <Label>Nome</Label>
-      <Info>Diego Fernandes</Info>
+      <Info>{user.name}</Info>
 
       <Label>Email</Label>
-      <Info>diego@rocketseat.com.br</Info>
+      <Info>{user.email}</Info>
 
-      <Label>Emoresa</Label>
-      <Info>Rocketseat</Info>
+      <Label>Empresa</Label>
+      <Info>{user.company || 'Não setado'}</Info>
 
       <Label>Faixa</Label>
-      <Info>Preta</Info>
+      <Info>{user.belt || 'Não setado'}</Info>
     </Container>
   );
 }
 
 Profile.navigationOptions = ({ navigation }) => ({
-  title: `Perfil do ${navigation.getParam('name')}`,
+  title: `Perfil do ${navigation.getParam('user').name}`,
 });
