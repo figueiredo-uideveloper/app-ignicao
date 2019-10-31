@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import ProfileUpdate from './pages/ProfileUpdate';
+import Launchs from './pages/Launchs';
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -18,7 +19,6 @@ export default createAppContainer(
           Dashboard,
           Profile,
         }, {
-          initialRouteName: 'Profile',
           defaultNavigationOptions: {
             headerTintColor: '#FFF',
             headerBackTitle: null,
@@ -30,9 +30,10 @@ export default createAppContainer(
           tabBarIcon: ({ tintColor }) => <MaterialIcons name="map" size={24} color={tintColor} />
         },
       },
+      Launchs,
       ProfileUpdate,
     }, {
-      initialRouteName: 'Map',
+      initialRouteName: 'ProfileUpdate',
       tabBarOptions: {
         activeTintColor: '#FFF',
         style: { backgroundColor: '#111' }
